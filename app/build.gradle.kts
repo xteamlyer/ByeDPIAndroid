@@ -143,3 +143,9 @@ tasks.register<BuildTun2Socks>("buildTun2Socks") {
 tasks.withType(KotlinCompile::class).configureEach {
     dependsOn("buildTun2Socks")
 }
+
+tasks.whenTaskAdded {
+    if (name.contains("collect")) {
+        dependsOn("buildTun2Socks", "getGomobileBind")
+    }
+}
